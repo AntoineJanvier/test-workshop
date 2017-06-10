@@ -8,7 +8,7 @@ public class DatabaseManager {
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                String url = "jdbc:mysql://localhost:3306/test";
+                String url = "jdbc:mysql://localhost:3306/projectunittests";
                 String user = "root";
                 String password = "password";
                 connection = DriverManager.getConnection(url, user, password);
