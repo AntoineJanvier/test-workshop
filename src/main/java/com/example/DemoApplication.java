@@ -58,12 +58,16 @@ public class DemoApplication {
         System.out.print("Type a password");
         String password = sc.next();
 
-        User u = new User(username, Role.USER, password);
+//        User u = new User();
+//        u.setName(username);
+//        u.setRole(Role.USER);
+//        u.setName(password);
 
         UserRepository userRepository = new UserRepository(new DatabaseManager());
-        User u2 = userRepository.insertUser(u);
+//        User u2 = userRepository.insertUser(User u);
 
-        return u2 != null;
+//        return u2 != null;
+        return false;
     }
 
     private static boolean authenticate_existing_user(String method) throws SQLException {

@@ -21,6 +21,7 @@ public class UserIntegrationTest extends DatabaseTest {
         final User user = User.builder()
                 .name("Johny")
                 .role(Role.USER)
+                .password("toto")
                 .build();
         int beforeCounter = countOnTable("user");
 
@@ -31,5 +32,10 @@ public class UserIntegrationTest extends DatabaseTest {
         assertThat(beforeCounter).isEqualTo(0);
         assertThat(counter).isEqualTo(1);
         assertThat(user.getId()).isGreaterThan(0);
+    }
+
+    @Test
+    public void should_get_an_existing_user() {
+
     }
 }

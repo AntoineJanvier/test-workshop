@@ -12,7 +12,7 @@ public class UserRepository {
 
     public User insertUser(User user) throws SQLException {
         final Connection connection = database.getConnection();
-        final String sql = "INSERT INTO user (NAME, TYPE, PWD) VALUES (?, ?, ?);";
+        final String sql = "INSERT INTO user (name, type, pwd) VALUES (?, ?, ?);";
 
         final PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, user.getName());
@@ -27,17 +27,14 @@ public class UserRepository {
         }
         return null;
     }
-    public User getUser(String username, String password) throws SQLException {
+    public User getUser(User user) throws SQLException {
         final Connection connection = database.getConnection();
-        final String sql = "SELECT * FROM user WHERE name=" + username + " AND password=" + password + ";";
+        final String sql = "SELECT * FROM user WHERE name=" + username + " AND pwd=" + password + ";";
 
         final PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.execute();
         final ResultSet resultSet = statement.getGeneratedKeys();
 
-        if (resultSet.next()) {
-            return new User();
-        }
         return null;
     }
 }

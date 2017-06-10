@@ -10,7 +10,7 @@ public class DatabaseManager {
             if (connection == null || connection.isClosed()) {
                 String url = "jdbc:mysql://localhost:3306/projectunittests";
                 String user = "root";
-                String password = "password";
+                String password = "root";
                 connection = DriverManager.getConnection(url, user, password);
                 System.out.println("Connection acquired");
             }

@@ -38,7 +38,7 @@ public abstract class DatabaseTest {
     @Test
     public void should_connect_to_database() throws SQLException {
         final Connection connection = databaseManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("insert into user (name, type) VALUES ('John', 'ADMIN')");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO user (name, type, pwd) VALUES ('John', 'ADMIN', 'toto')");
 
         final int insertedRows = statement.executeUpdate();
 
