@@ -18,7 +18,6 @@ public class UserIntegrationTest extends DatabaseTest {
 
     private final User user2 = User.builder()
             .name("bob")
-            .name("bob")
             .role(Role.USER)
             .password("toto")
             .build();
