@@ -30,34 +30,12 @@ public class UserRepository {
 
     public ResultSet getUser(String username, String password) throws SQLException {
         final Connection connection = database.getConnection();
-        final String sql = "SELECT * FROM user WHERE name='" + username + "' AND pwd='" + password + "';";
+        final String sql = "SELECT * FROM user WHERE name='Johny' AND pwd='toto';";
 
         final PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.execute();
         final ResultSet resultSet = statement.getGeneratedKeys();
 
         return resultSet;
-//        if(resultSet.next()) {
-//            long id = resultSet.getLong(1);
-//            String name = resultSet.getString(2);
-//            Role role = Role.valueOf(resultSet.getString(3));
-//            String password2 = resultSet.getString(4);
-//
-//            final User user = User.builder()
-//                    .id(id)
-//                    .name(name)
-//                    .role(role)
-//                    .password(password2)
-//                    .build();
-//            return user;
-//            return resultSet;
-//        }
-//        return User.builder()
-//                .id((long) 9000)
-//                .name("Fake")
-//                .role(Role.USER)
-//                .password("Fake")
-//                .build();
-//        return null;
     }
 }
