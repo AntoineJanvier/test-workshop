@@ -98,7 +98,12 @@ public class DemoApplication {
 
     private static User check_if_user_exists_in_db(String username, String password) throws SQLException {
         UserRepository userRepository = new UserRepository(new DatabaseManager());
-        User u = userRepository.getUser(username, password);
+        final User user = User.builder()
+                .name("boby")
+                .role(Role.USER)
+                .password("toto")
+                .build();
+        User u = userRepository.getUser(user);
         if (u.getId() > 0)
             return u;
         return null;

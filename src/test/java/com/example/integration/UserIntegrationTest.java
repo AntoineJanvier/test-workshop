@@ -9,7 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserIntegrationTest extends DatabaseTest {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private final User user = User.builder()
+            .name("Johny")
+            .role(Role.USER)
+            .password("toto")
+            .build();
 
     @Before
     public void initRepo() {
@@ -18,11 +23,7 @@ public class UserIntegrationTest extends DatabaseTest {
 
     @Test
     public void should_insert_user() throws SQLException {
-        final User user = User.builder()
-                .name("Johny")
-                .role(Role.USER)
-                .password("toto")
-                .build();
+
         int beforeCounter = countOnTable("user");
 
         userRepository.insertUser(user);
@@ -35,24 +36,11 @@ public class UserIntegrationTest extends DatabaseTest {
     }
 
     @Test
-    public void should_get_an_existing_user() {
-        final User user = User.builder()
-                .name("boby")
-                .role(Role.USER)
-                .password("toto")
-                .build();
+    public void should_get_an_existing_user() throws SQLException {
 
-        int beforeCounter = countOnTable("user");
+        userRepository.getUser(user);
 
-        userRepository.insertUser(user);
-
-        int counter = countOnTable("user");
-
-
-        assertThat(beforeCounter).isEqualTo(0);
-        assertThat(counter).isEqualTo(1);
         assertThat(userRepository.getUser(user)).isEqualTo(null);
     }
 
-    }
 }
