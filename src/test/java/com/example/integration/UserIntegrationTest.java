@@ -16,6 +16,19 @@ public class UserIntegrationTest extends DatabaseTest {
             .password("toto")
             .build();
 
+    private final User user2 = User.builder()
+            .name("bob")
+            .name("bob")
+            .role(Role.USER)
+            .password("toto")
+            .build();
+
+    private final User user3= User.builder()
+            .name("Johny")
+            .role(Role.USER)
+            .password("toto")
+            .build();
+
     @Before
     public void initRepo() {
         userRepository = new UserRepository(databaseManager);
@@ -32,7 +45,7 @@ public class UserIntegrationTest extends DatabaseTest {
 
         assertThat(beforeCounter).isEqualTo(0);
         assertThat(counter).isEqualTo(1);
-        assertThat(user.getId()).isGreaterThan(0);
+        assertThat(userRepository.getUser(user).getId()).isGreaterThan(0);
     }
 
     @Test
@@ -41,6 +54,26 @@ public class UserIntegrationTest extends DatabaseTest {
         userRepository.getUser(user);
 
         assertThat(userRepository.getUser(user)).isEqualTo(null);
+    }
+    
+    @Test
+    public void should_users_is_equal() {
+
+
+        userRepository.insertUser(user2);
+        userRepository.insertUser(user3);
+
+        int counter = countOnTable("user");
+
+        assertThat(counter).isEqualTo(3);
+
+        assertThat(userRepository.getUser(user).getId()).isGreaterThan(0);
+        assertThat(userRepository.getUser(user2).getId()).isGreaterThan(0);
+        assertThat(userRepository.getUser(user3).getId()).isGreaterThan(0);
+
+        assertThat(userRepository.getUser(user).isEqual(userRepository.getUser(user3))).isEqualTo(true);
+        assertThat(userRepository.getUser(user).isEqual(userRepository.getUser(user2))).isEqualTo(false);
+
     }
 
 }
