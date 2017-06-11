@@ -59,12 +59,14 @@ public class UserIntegrationTest extends DatabaseTest {
     @Test
     public void should_users_is_equal() throws SQLException {
 
+
+        userRepository.insertUser(user);
         userRepository.insertUser(user2);
         userRepository.insertUser(user3);
 
         int counter = countOnTable("user");
 
-        assertThat(counter).isEqualTo(2);
+        assertThat(counter).isEqualTo(3);
 
         assertThat(userRepository.getUser(user.getName(), user.getPassword()).getId()).isGreaterThan(0);
         assertThat(userRepository.getUser(user2.getName(), user2.getPassword()).getId()).isGreaterThan(0);

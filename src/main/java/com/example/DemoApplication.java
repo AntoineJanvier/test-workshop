@@ -14,6 +14,8 @@ import java.util.Scanner;
 public class DemoApplication {
 
     private static Scanner sc = new Scanner(System.in);
+    private static DatabaseManager databaseManager = new DatabaseManager();
+    private static UserRepository userRepository = new UserRepository(databaseManager);
 
     public static void main(String[] args) throws SQLException {
         SpringApplication.run(DemoApplication.class, args);
@@ -55,18 +57,9 @@ public class DemoApplication {
 
         System.out.print("Type a username : ");
         String username = sc.next();
-        System.out.print("Type a password");
+        System.out.print("Type a password : ");
         String password = sc.next();
 
-//        User u = new User();
-//        u.setName(username);
-//        u.setRole(Role.USER);
-//        u.setName(password);
-
-        UserRepository userRepository = new UserRepository(new DatabaseManager());
-//        User u2 = userRepository.insertUser(User u);
-
-//        return u2 != null;
         return false;
     }
 
@@ -97,14 +90,8 @@ public class DemoApplication {
     }
 
     private static User check_if_user_exists_in_db(String username, String password) throws SQLException {
-        UserRepository userRepository = new UserRepository(new DatabaseManager());
-        final User user = User.builder()
-                .name("boby")
-                .role(Role.USER)
-                .password("toto")
-                .build();
-        User u = userRepository.getUser("Johny", "toto");
-        if (u.getId() > 0)
+        final User u = userRepository.getUser(username, password);
+        if (u.getName().length() > 0)
             return u;
         return null;
     }

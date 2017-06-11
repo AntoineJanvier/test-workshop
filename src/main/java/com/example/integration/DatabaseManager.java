@@ -12,7 +12,7 @@ public class DatabaseManager {
                 String user = "root";
                 String password = "root";
                 connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Connection acquired");
+//                System.out.println("Connection acquired");
             }
             return connection;
         } catch (SQLException e) {

@@ -21,12 +21,13 @@ public class UserRepository {
         statement.executeUpdate();
         final ResultSet resultSet = statement.getGeneratedKeys();
 
-        if(resultSet.next()) {
+        if (resultSet.next()) {
             user.setId(resultSet.getLong(1));
             return user;
         }
         return null;
     }
+
     public User getUser(String username, String password) throws SQLException {
         final Connection connection = database.getConnection();
         final String sql = "SELECT * FROM user WHERE name='" + username + "' AND pwd='" + password + "';";
@@ -35,11 +36,20 @@ public class UserRepository {
         statement.execute();
         final ResultSet resultSet = statement.getGeneratedKeys();
 
-        System.out.println(resultSet.toString());
+//        System.out.println(resultSet.toString());
+//        ResultSetMetaData rsmd = resultSet.getMetaData();
+//        int columnsNumber = rsmd.getColumnCount();
+//        while (resultSet.next()) {
+//            for (int i = 1; i <= columnsNumber; i++) {
+//                if (i > 1) System.out.print(",  ");
+//                String columnValue = resultSet.getString(i);
+//                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//            }
+//            System.out.println("");
+//        }
 
         if(resultSet.next()) {
             final User user = User.builder()
-                    .id(resultSet.getLong(1))
                     .name(resultSet.getString(2))
                     .role(Role.valueOf(resultSet.getString(3)))
                     .password(resultSet.getString(4))
