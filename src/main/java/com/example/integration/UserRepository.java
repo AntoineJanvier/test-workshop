@@ -36,18 +36,6 @@ public class UserRepository {
         statement.execute();
         final ResultSet resultSet = statement.getGeneratedKeys();
 
-//        System.out.println(resultSet.toString());
-//        ResultSetMetaData rsmd = resultSet.getMetaData();
-//        int columnsNumber = rsmd.getColumnCount();
-//        while (resultSet.next()) {
-//            for (int i = 1; i <= columnsNumber; i++) {
-//                if (i > 1) System.out.print(",  ");
-//                String columnValue = resultSet.getString(i);
-//                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-//            }
-//            System.out.println("");
-//        }
-
         if(resultSet.next()) {
             final User user = User.builder()
                     .name(resultSet.getString(2))
@@ -56,6 +44,11 @@ public class UserRepository {
                     .build();
             return user;
         }
-        return null;
+        return User.builder()
+                .id((long) 9000)
+                .name("Fake")
+                .role(Role.USER)
+                .password("Fake")
+                .build();
     }
 }

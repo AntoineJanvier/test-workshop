@@ -59,7 +59,6 @@ public class UserIntegrationTest extends DatabaseTest {
     @Test
     public void should_users_is_equal() throws SQLException {
 
-
         userRepository.insertUser(user);
         userRepository.insertUser(user2);
         userRepository.insertUser(user3);
