@@ -51,9 +51,10 @@ public class UserIntegrationTest extends DatabaseTest {
     @Test
     public void should_get_an_existing_user() throws SQLException {
 
-        userRepository.getUser(user);
+        userRepository.insertUser(user);
+        userRepository.getUser(user.getName(), user.getPassword());
 
-        assertThat(userRepository.getUser(user)).isEqualTo(null);
+        assertThat(userRepository.getUser(user.getName(), user.getPassword())).isEqualTo(null);
     }
     
     @Test

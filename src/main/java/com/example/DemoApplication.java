@@ -103,7 +103,7 @@ public class DemoApplication {
                 .role(Role.USER)
                 .password("toto")
                 .build();
-        User u = userRepository.getUser(user);
+        User u = userRepository.getUser("Johny", "toto");
         if (u.getId() > 0)
             return u;
         return null;

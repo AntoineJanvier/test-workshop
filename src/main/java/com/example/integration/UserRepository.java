@@ -27,9 +27,9 @@ public class UserRepository {
         }
         return null;
     }
-    public User getUser(User user) throws SQLException {
+    public User getUser(String username, String password) throws SQLException {
         final Connection connection = database.getConnection();
-        final String sql = "SELECT * FROM user WHERE name=" + user.getName() + " AND pwd=" + user.getPassword() + ";";
+        final String sql = "SELECT * FROM user WHERE name='" + username + "' AND pwd='" + password + "';";
 
         final PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.execute();
@@ -37,6 +37,15 @@ public class UserRepository {
 
         System.out.println(resultSet.toString());
 
+        if(resultSet.next()) {
+            final User user = User.builder()
+                    .id(resultSet.getLong(1))
+                    .name(resultSet.getString(2))
+                    .role(Role.valueOf(resultSet.getString(3)))
+                    .password(resultSet.getString(4))
+                    .build();
+            return user;
+        }
         return null;
     }
 }
