@@ -53,6 +53,5 @@ public class UserIntegrationTest extends DatabaseTest {
         assertThat(counter).isEqualTo(1);
         assertThat(userRepository.getUser(user)).isEqualTo(null);
     }
-
-    }
+    
 }
