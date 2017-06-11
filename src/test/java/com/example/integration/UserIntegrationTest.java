@@ -70,8 +70,8 @@ public class UserIntegrationTest extends DatabaseTest {
         assertThat(userRepository.getUser(user2.getName(), user2.getPassword()).getId()).isGreaterThan(0);
         assertThat(userRepository.getUser(user3.getName(), user3.getPassword()).getId()).isGreaterThan(0);
 
-//        assertThat(userRepository.getUser(user).isEqual(userRepository.getUser(user3))).isEqualTo(true);
-//        assertThat(userRepository.getUser(user).isEqual(userRepository.getUser(user2))).isEqualTo(false);
+//        assertThat(userRepository.getUser(user.getName(), user.getPassword()).isEqual(userRepository.getUser(user3.getName(), user3.getPassword()))).isEqualTo(true);
+//        assertThat(userRepository.getUser(user.getName(), user.getPassword()).isEqual(userRepository.getUser(user2.getName(), user2.getPassword()))).isEqualTo(false);
 
     }
 
