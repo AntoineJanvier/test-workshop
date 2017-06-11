@@ -29,7 +29,7 @@ public class UserRepository {
     }
     public User getUser(User user) throws SQLException {
         final Connection connection = database.getConnection();
-        final String sql = "SELECT * FROM user WHERE name=" + username + " AND pwd=" + password + ";";
+        final String sql = "SELECT * FROM user WHERE name=" + user.getName() + " AND pwd=" + user.getPassword() + ";";
 
         final PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.execute();

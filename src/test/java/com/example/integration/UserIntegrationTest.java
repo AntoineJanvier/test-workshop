@@ -36,6 +36,23 @@ public class UserIntegrationTest extends DatabaseTest {
 
     @Test
     public void should_get_an_existing_user() {
+        final User user = User.builder()
+                .name("boby")
+                .role(Role.USER)
+                .password("toto")
+                .build();
+
+        int beforeCounter = countOnTable("user");
+
+        userRepository.insertUser(user);
+
+        int counter = countOnTable("user");
+
+
+        assertThat(beforeCounter).isEqualTo(0);
+        assertThat(counter).isEqualTo(1);
+        assertThat(userRepository.getUser(user)).isEqualTo(null);
+    }
 
     }
 }
