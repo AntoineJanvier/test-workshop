@@ -7,6 +7,7 @@ import com.example.integration.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -90,9 +91,14 @@ public class DemoApplication {
     }
 
     private static User check_if_user_exists_in_db(String username, String password) throws SQLException {
-        final User u = userRepository.getUser(username, password);
-        if (u.getName().length() > 0)
-            return u;
+        ResultSet resultSet = userRepository.getUser(username, password);
+        if (resultSet.getString(2).length() > 0)
+            return User.builder()
+                    .id((long) 900)
+                    .name("Jacky")
+                    .role(Role.USER)
+                    .password("Michel")
+                    .build();
         return null;
     }
 }

@@ -28,7 +28,7 @@ public class UserRepository {
         return null;
     }
 
-    public User getUser(String username, String password) throws SQLException {
+    public ResultSet getUser(String username, String password) throws SQLException {
         final Connection connection = database.getConnection();
         final String sql = "SELECT * FROM user WHERE name='" + username + "' AND pwd='" + password + "';";
 
@@ -36,19 +36,28 @@ public class UserRepository {
         statement.execute();
         final ResultSet resultSet = statement.getGeneratedKeys();
 
-        if(resultSet.next()) {
-            final User user = User.builder()
-                    .name(resultSet.getString(2))
-                    .role(Role.valueOf(resultSet.getString(3)))
-                    .password(resultSet.getString(4))
-                    .build();
-            return user;
-        }
-        return User.builder()
-                .id((long) 9000)
-                .name("Fake")
-                .role(Role.USER)
-                .password("Fake")
-                .build();
+        return resultSet;
+//        if(resultSet.next()) {
+//            long id = resultSet.getLong(1);
+//            String name = resultSet.getString(2);
+//            Role role = Role.valueOf(resultSet.getString(3));
+//            String password2 = resultSet.getString(4);
+//
+//            final User user = User.builder()
+//                    .id(id)
+//                    .name(name)
+//                    .role(role)
+//                    .password(password2)
+//                    .build();
+//            return user;
+//            return resultSet;
+//        }
+//        return User.builder()
+//                .id((long) 9000)
+//                .name("Fake")
+//                .role(Role.USER)
+//                .password("Fake")
+//                .build();
+//        return null;
     }
 }

@@ -44,7 +44,7 @@ public class UserIntegrationTest extends DatabaseTest {
 
         assertThat(beforeCounter).isEqualTo(0);
         assertThat(counter).isEqualTo(1);
-        assertThat(userRepository.getUser("Johny", "toto").getId()).isGreaterThan(0);
+        assertThat(userRepository.getUser("Johny", "toto").next()).isEqualTo(true);
     }
 
     @Test
@@ -67,13 +67,14 @@ public class UserIntegrationTest extends DatabaseTest {
 
         assertThat(counter).isEqualTo(3);
 
-        assertThat(userRepository.getUser(user.getName(), user.getPassword()).getId()).isGreaterThan(0);
-        assertThat(userRepository.getUser(user2.getName(), user2.getPassword()).getId()).isGreaterThan(0);
-        assertThat(userRepository.getUser(user3.getName(), user3.getPassword()).getId()).isGreaterThan(0);
+        assertThat(userRepository.getUser(user.getName(), user.getPassword()).next()).isEqualTo(true);
+
+//        assertThat(userRepository.getUser(user.getName(), user.getPassword()).getId()).isGreaterThan(0);
+//        assertThat(userRepository.getUser(user2.getName(), user2.getPassword()).getId()).isGreaterThan(0);
+//        assertThat(userRepository.getUser(user3.getName(), user3.getPassword()).getId()).isGreaterThan(0);
 
 //        assertThat(userRepository.getUser(user.getName(), user.getPassword()).isEqual(userRepository.getUser(user3.getName(), user3.getPassword()))).isEqualTo(true);
 //        assertThat(userRepository.getUser(user.getName(), user.getPassword()).isEqual(userRepository.getUser(user2.getName(), user2.getPassword()))).isEqualTo(false);
 
     }
-
 }
